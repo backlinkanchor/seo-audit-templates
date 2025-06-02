@@ -430,7 +430,7 @@ The recommended strategy balances quick wins with long-term sustainable growth. 
 ---
 
 **Prepared by:** Backlink Anchor SEO Team  
-**Contact:** info@backlinkanchor.com  
+**Contact:** contact@backlinkanchor.com  
 **Date:** December 15, 2024  
 
 *This audit report is confidential and proprietary. All recommendations are based on current SEO best practices and Google guidelines as of the audit date.*
