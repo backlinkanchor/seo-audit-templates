@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Core Web Vitals Tracker Template</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .header {
+            background: #1e3a8a;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .good { background-color: #d4edda; color: #155724; }
+        .needs-improvement { background-color: #fff3cd; color: #856404; }
+        .poor { background-color: #f8d7da; color: #721c24; }
+        .metric-explanation {
+            background: #e9f5ff;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .download-note {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ffc107;
+        }
+        .action-buttons {
+            margin-top: 20px;
+        }
+        button {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background: #1e40af;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0 10px 0;
+            color: #1e3a8a;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background-color: #28a745;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Core Web Vitals Tracker Template</h1>
+            <p>Track and monitor your website's Core Web Vitals performance over time</p>
+        </div>
+
+        <div class="download-note">
+            <strong>📊 Excel Template Instructions:</strong> This is a visual representation of what your Excel template should contain. The actual Excel file should have these worksheets and data structure for easy tracking and analysis.
+        </div>
+
+        <div class="metric-explanation">
+            <h3>Core Web Vitals Metrics</h3>
+            <ul>
+                <li><strong>LCP (Largest Contentful Paint):</strong> Good: ≤2.5s, Needs Improvement: ≤4.0s, Poor: >4.0s</li>
+                <li><strong>FID (First Input Delay):</strong> Good: ≤100ms, Needs Improvement: ≤300ms, Poor: >300ms</li>
+                <li><strong>CLS (Cumulative Layout Shift):</strong> Good: ≤0.1, Needs Improvement: ≤0.25, Poor: >0.25</li>
+                <li><strong>INP (Interaction to Next Paint):</strong> Good: ≤200ms, Needs Improvement: ≤500ms, Poor: >500ms</li>
+            </ul>
+        </div>
+
+        <div class="section-title">📊 Worksheet 1: Core Web Vitals Dashboard</div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>URL</th>
+                        <th>Device Type</th>
+                        <th>LCP (s)</th>
+                        <th>LCP Status</th>
+                        <th>FID (ms)</th>
+                        <th>FID Status</th>
+                        <th>CLS</th>
+                        <th>CLS Status</th>
+                        <th>INP (ms)</th>
+                        <th>INP Status</th>
+                        <th>Overall Score</th>
+                        <th>Tool Used</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2025-06-01</td>
+                        <td>https://example.com</td>
+                        <td>Desktop</td>
+                        <td>2.1</td>
+                        <td class="good">Good</td>
+                        <td>85</td>
+                        <td class="good">Good</td>
+                        <td>0.08</td>
+                        <td class="good">Good</td>
+                        <td>180</td>
+                        <td class="good">Good</td>
+                        <td>90</td>
+                        <td>PageSpeed Insights</td>
+                    </tr>
+                    <tr>
+                        <td>2025-06-01</td>
+                        <td>https://example.com</td>
+                        <td>Mobile</td>
+                        <td>3.2</td>
+                        <td class="needs-improvement">Needs Improvement</td>
+                        <td>150</td>
+                        <td class="needs-improvement">Needs Improvement</td>
+                        <td>0.15</td>
+                        <td class="needs-improvement">Needs Improvement</td>
+                        <td>280</td>
+                        <td class="needs-improvement">Needs Improvement</td>
+                        <td>65</td>
+                        <td>PageSpeed Insights</td>
+                    </tr>
+                    <tr>
+                        <td>2025-05-15</td>
+                        <td>https://example.com/product</td>
+                        <td>Desktop</td>
+                        <td>4.8</td>
+                        <td class="poor">Poor</td>
+                        <td>320</td>
+                        <td class="poor">Poor</td>
+                        <td>0.28</td>
+                        <td class="poor">Poor</td>
+                        <td>550</td>
+                        <td class="poor">Poor</td>
+                        <td>25</td>
+                        <td>GTmetrix</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-title">📈 Worksheet 2: Historical Tracking</div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>Avg LCP Desktop</th>
+                        <th>Avg LCP Mobile</th>
+                        <th>Avg FID Desktop</th>
+                        <th>Avg FID Mobile</th>
+                        <th>Avg CLS Desktop</th>
+                        <th>Avg CLS Mobile</th>
+                        <th>Pages Tested</th>
+                        <th>% Passing CWV</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>May 2025</td>
+                        <td>2.8</td>
+                        <td>3.5</td>
+                        <td>95</td>
+                        <td>165</td>
+                        <td>0.12</td>
+                        <td>0.18</td>
+                        <td>25</td>
+                        <td>68%</td>
+                        <td>Implemented image optimization</td>
+                    </tr>
+                    <tr>
+                        <td>April 2025</td>
+                        <td>3.2</td>
+                        <td>4.1</td>
+                        <td>125</td>
+                        <td>195</td>
+                        <td>0.15</td>
+                        <td>0.22</td>
+                        <td>25</td>
+                        <td>52%</td>
+                        <td>Before optimization</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-title">🔧 Worksheet 3: Optimization Actions</div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Action Item</th>
+                        <th>Priority</th>
+                        <th>Metric Impact</th>
+                        <th>Expected Improvement</th>
+                        <th>Status</th>
+                        <th>Assigned To</th>
+                        <th>Due Date</th>
+                        <th>Completion Date</th>
+                        <th>Actual Impact</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Implement WebP image format</td>
+                        <td>High</td>
+                        <td>LCP</td>
+                        <td>0.5-1.0s improvement</td>
+                        <td>Completed</td>
+                        <td>Dev Team</td>
+                        <td>2025-05-15</td>
+                        <td>2025-05-12</td>
+                        <td>0.7s improvement</td>
+                        <td>Significant LCP improvement observed</td>
+                    </tr>
+                    <tr>
+                        <td>Optimize JavaScript bundles</td>
+                        <td>High</td>
+                        <td>FID, INP</td>
+                        <td>50-100ms improvement</td>
+                        <td>In Progress</td>
+                        <td>Frontend Team</td>
+                        <td>2025-06-30</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>Code splitting implementation started</td>
+                    </tr>
+                    <tr>
+                        <td>Fix layout shifts in header</td>
+                        <td>Medium</td>
+                        <td>CLS</td>
+                        <td>0.05-0.1 improvement</td>
+                        <td>Planned</td>
+                        <td>UX Team</td>
+                        <td>2025-07-15</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>Reserving space for dynamic elements</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-title">📱 Worksheet 4: Page-Specific Analysis</div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Page URL</th>
+                        <th>Page Type</th>
+                        <th>Traffic %</th>
+                        <th>LCP Score</th>
+                        <th>FID Score</th>
+                        <th>CLS Score</th>
+                        <th>Overall CWV</th>
+                        <th>Primary Issue</th>
+                        <th>Optimization Priority</th>
+                        <th>Last Updated</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>/</td>
+                        <td>Homepage</td>
+                        <td>35%</td>
+                        <td class="good">Good</td>
+                        <td class="good">Good</td>
+                        <td class="needs-improvement">Needs Improvement</td>
+                        <td class="needs-improvement">Needs Improvement</td>
+                        <td>Layout shift in hero section</td>
+                        <td>High</td>
+                        <td>2025-06-01</td>
+                    </tr>
+                    <tr>
+                        <td>/products</td>
+                        <td>Category</td>
+                        <td>20%</td>
+                        <td class="needs-improvement">Needs Improvement</td>
+                        <td class="good">Good</td>
+                        <td class="good">Good</td>
+                        <td class="needs-improvement">Needs Improvement</td>
+                        <td>Large product images</td>
+                        <td>High</td>
+                        <td>2025-06-01</td>
+                    </tr>
+                    <tr>
+                        <td>/about</td>
+                        <td>Content</td>
+                        <td>5%</td>
+                        <td class="good">Good</td>
+                        <td class="good">Good</td>
+                        <td class="good">Good</td>
+                        <td class="good">Good</td>
+                        <td>None</td>
+                        <td>Low</td>
+                        <td>2025-06-01</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="action-buttons">
+            <button onclick="downloadTemplate()">📥 Download Excel Template</button>
+            <button onclick="showInstructions()">📖 View Instructions</button>
+            <button onclick="exportData()">📊 Export Current Data</button>
+        </div>
+
+        <div class="metric-explanation">
+            <h3>🔍 How to Use This Template</h3>
+            <ol>
+                <li><strong>Regular Testing:</strong> Test your key pages weekly using tools like PageSpeed Insights, GTmetrix, or WebPageTest</li>
+                <li><strong>Data Entry:</strong> Record metrics in the Dashboard worksheet immediately after testing</li>
+                <li><strong>Trend Analysis:</strong> Use the Historical Tracking worksheet to identify patterns and improvements</li>
+                <li><strong>Action Planning:</strong> Document optimization tasks in the Optimization Actions worksheet</li>
+                <li><strong>Page Prioritization:</strong> Focus on high-traffic pages with poor CWV scores first</li>
+                <li><strong>Monthly Reviews:</strong> Analyze trends and adjust optimization strategies monthly</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        function downloadTemplate() {
+            alert('Excel template structure shown above. Create an Excel file with the 4 worksheets and data structure as displayed.');
+        }
+
+        function showInstructions() {
+            alert('Instructions: 1) Create Excel file with 4 worksheets 2) Copy table structures 3) Add data validation for status columns 4) Create charts for trend visualization');
+        }
+
+        function exportData() {
+            alert('In the actual Excel template, you can export data to CSV or connect to reporting tools.');
+        }
+    </script>
+</body>
+</html>
