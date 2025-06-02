@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Crawl Analysis Template Generator</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+    .content {
+      padding: 30px;
+    }
+    .section {
+      margin-bottom: 30px;
+      border: 1px solid #e1e5e9;
+      border-radius: 12px;
+    }
+    .section-header {
+      background: #f8f9fa;
+      padding: 15px 20px;
+      border-bottom: 1px solid #e1e5e9;
+      font-weight: 600;
+      color: #2d3748;
+    }
+    .section-content {
+      padding: 20px;
+    }
+    .btn {
+      background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-right: 10px;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🕷️ Crawl Analysis Template</h1>
+      <p>Generate a full technical SEO audit spreadsheet in one click</p>
+    </div>
+    <div class="content">
+      <div class="section">
+        <div class="section-header">🚀 Download Template</div>
+        <div class="section-content">
+          <button class="btn" onclick="generateTemplate()">📥 Download Crawl Analysis Template</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function generateTemplate() {
+      const wb = XLSX.utils.book_new();
+
+      // Sheet 1: Crawl Overview
+      const crawlOverview = [
+        ['WEBSITE CRAWL ANALYSIS OVERVIEW'],
+        ['Website:', 'https://example.com', '', 'Crawl Date:', new Date().toLocaleDateString()],
+        ['Crawl Tool:', 'Screaming Frog', '', 'Crawl Depth:', '5'],
+        ['Total URLs Found:', '1247', '', 'Crawl Duration:', '15 minutes'],
+        [],
+        ['CRAWL STATISTICS', 'Count', 'Percentage'],
+        ['Total URLs Discovered', '1247', '100%'],
+        ['Successfully Crawled', '1186', '95.1%'],
+        ['Crawl Errors', '61', '4.9%'],
+        [],
+        ['STATUS CODE BREAKDOWN', 'Count', 'Percentage', 'Status'],
+        ['200 OK', '1089', '87.3%', 'Good'],
+        ['301 Redirects', '78', '6.3%', 'Review'],
+        ['302 Redirects', '12', '1.0%', 'Warning'],
+        ['404 Not Found', '45', '3.6%', 'Critical'],
+        ['500 Server Error', '8', '0.6%', 'Critical'],
+        ['Other Status Codes', '15', '1.2%', 'Review']
+      ];
+      XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(crawlOverview), "Crawl Overview");
+
+      // Sheet 2: URL Analysis
+      const urlAnalysis = [
+        ['URL', 'Status Code', 'Title Tag', 'Meta Description', 'H1', 'Word Count', 'Issues'],
+        ['https://example.com/', '200', 'Home - Example', 'Welcome to our site', 'Welcome', '245', 'None'],
+        ['https://example.com/about', '200', 'About Us - Example', '', 'About', '320', 'Missing Meta Description'],
+        ['https://example.com/contact', '200', 'Contact - Example', 'Get in touch', 'Contact Us', '150', 'Low Word Count'],
+        ['https://example.com/old-page', '404', '', '', '', '0', '404 Error'],
+        ['https://example.com/redirect', '301', '', '', '', '0', 'Redirect']
+      ];
+      XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(urlAnalysis), "URL Analysis");
+
+      // Sheet 3: Response Codes
+      const responseCodes = [
+        ['URL', 'Status Code', 'Status Text', 'Redirect Target', 'Redirect Chain', 'Action Required'],
+        ['https://example.com/old-page', '404', 'Not Found', '', '', 'Fix or Redirect'],
+        ['https://example.com/redirect', '301', 'Moved Permanently', 'https://example.com/new-page', '1 hop', 'Review'],
+        ['https://example.com/server-error', '500', 'Internal Server Error', '', '', 'Fix Server']
+      ];
+      XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(responseCodes), "Response Codes");
+
+      // Sheet 4: Meta Data Issues
+      const metaDataIssues = [
+        ['URL', 'Issue Type', 'Current Value', 'Recommendation', 'Severity', 'Fix Priority'],
+        ['https://example.com/about', 'Missing Meta Description', '', 'Add meta description', 'Medium', 'High'],
+        ['https://example.com/old-page', 'Missing Title Tag', '', 'Write a clear title', 'High', 'High'],
+        ['https://example.com/blog', 'Short Content', '95 words', 'Add content', 'Low', 'Medium']
+      ];
+      XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(metaDataIssues), "Meta Data Issues");
+
+      // Sheet 5: Internal Links
+      const internalLinks = [
+        ['Source URL', 'Target URL', 'Anchor Text', 'Link Type'],
+        ['https://example.com/', 'https://example.com/about', 'About Us', 'HTML'],
+        ['https://example.com/services', 'https://example.com/contact', 'Contact', 'Button']
+      ];
+      XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(internalLinks), "Internal Links");
+
+      // Sheet 6: Technical Issues
+      const technicalIssues = [
+        ['URL', 'Issue Category', 'Severity', 'Fix Priority'],
+        ['https://example.com/', 'Missing Schema', 'Medium', 'Medium'],
+        ['https://example.com/blog', 'Low Word Count', 'Low', 'Low'],
+        ['https://example.com/redirect', 'Redirect Loop', 'High', 'High']
+      ];
+      XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(technicalIssues), "Technical Issues");
+
+      XLSX.writeFile(wb, "crawl_analysis_template.xlsx");
+    }
+  </script>
+</body>
+</html>
