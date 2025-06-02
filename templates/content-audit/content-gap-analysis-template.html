@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Gap Analysis Template</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 12px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 6px;
+            text-align: left;
+        }
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        .high-priority { background-color: #fee2e2; color: #991b1b; }
+        .medium-priority { background-color: #fef3c7; color: #92400e; }
+        .low-priority { background-color: #d1fae5; color: #065f46; }
+        .competitor-gap { background-color: #dbeafe; color: #1e40af; }
+        .keyword-opportunity { background-color: #f3e8ff; color: #7c3aed; }
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 25px 0 15px 0;
+            color: #667eea;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .metric-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .stat-box {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 5px;
+        }
+        .filter-section {
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+        select, input {
+            padding: 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .action-buttons {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        button:hover {
+            background: #5a67d8;
+        }
+        .worksheet-tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+        .tab {
+            padding: 8px 15px;
+            background: #e5e7eb;
+            border-radius: 4px 4px 0 0;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .tab.active {
+            background: #667eea;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 Content Gap Analysis Template</h1>
+            <p>Identify content opportunities and competitive gaps to improve your SEO strategy</p>
+        </div>
+
+        <div class="metric-card">
+            <h3>📊 Template Overview</h3>
+            <p>This Excel template helps you systematically identify content gaps by analyzing competitor content, keyword opportunities, and user intent mismatches. Use this to prioritize content creation and optimization efforts.</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-number">247</div>
+                <div class="stat-label">Keywords Analyzed</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">45</div>
+                <div class="stat-label">Content Gaps Found</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">18</div>
+                <div class="stat-label">High Priority Opportunities</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">8.2K</div>
+                <div class="stat-label">Avg Monthly Searches</div>
+            </div>
+        </div>
+
+        <div class="worksheet-tabs">
+            <div class="tab active" onclick="showWorksheet(1)">Keyword Gap Analysis</div>
+            <div class="tab" onclick="showWorksheet(2)">Competitor Content</div>
+            <div class="tab" onclick="showWorksheet(3)">Topic Clusters</div>
+            <div class="tab" onclick="showWorksheet(4)">Content Opportunities</div>
+            <div class="tab" onclick="showWorksheet(5)">Action Plan</div>
+        </div>
+
+        <div id="worksheet-1">
+            <div class="section-title">
+                🎯 Worksheet 1: Keyword Gap Analysis
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-grid">
+                    <select><option>All Industries</option><option>E-commerce</option><option>SaaS</option></select>
+                    <select><option>All Search Volumes</option><option>1K-10K</option><option>10K+</option></select>
+                    <select><option>All Difficulties</option><option>Low (0-30)</option><option>Medium (31-70)</option></select>
+                    <input type="text" placeholder="Filter keywords...">
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Target Keyword</th>
+                            <th>Search Volume</th>
+                            <th>Keyword Difficulty</th>
+                            <th>Search Intent</th>
+                            <th>Our Ranking</th>
+                            <th>Our URL</th>
+                            <th>Competitor 1</th>
+                            <th>Comp 1 Rank</th>
+                            <th>Comp 1 URL</th>
+                            <th>Competitor 2</th>
+                            <th>Comp 2 Rank</th>
+                            <th>Comp 2 URL</th>
+                            <th>Gap Type</th>
+                            <th>Opportunity Score</th>
+                            <th>Priority</th>
+                            <th>Content Exists?</th>
+                            <th>Content Quality</th>
+                            <th>Recommended Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="high-priority">
+                            <td>seo audit checklist</td>
+                            <td>12,500</td>
+                            <td>45</td>
+                            <td>Informational</td>
+                            <td>Not ranking</td>
+                            <td>-</td>
+                            <td>semrush.com</td>
+                            <td>1</td>
+                            <td>/blog/seo-audit-checklist</td>
+                            <td>ahrefs.com</td>
+                            <td>3</td>
+                            <td>/blog/seo-audit</td>
+                            <td>Content Gap</td>
+                            <td>85</td>
+                            <td>High</td>
+                            <td>No</td>
+                            <td>-</td>
+                            <td>Create comprehensive guide</td>
+                        </tr>
+                        <tr class="medium-priority">
+                            <td>technical seo audit</td>
+                            <td>8,900</td>
+                            <td>52</td>
+                            <td>Informational</td>
+                            <td>15</td>
+                            <td>/technical-seo-guide</td>
+                            <td>moz.com</td>
+                            <td>2</td>
+                            <td>/learn/seo/technical-seo</td>
+                            <td>searchengineland.com</td>
+                            <td>4</td>
+                            <td>/technical-seo-guide</td>
+                            <td>Ranking Gap</td>
+                            <td>72</td>
+                            <td>Medium</td>
+                            <td>Yes</td>
+                            <td>Good</td>
+                            <td>Optimize existing content</td>
+                        </tr>
+                        <tr class="keyword-opportunity">
+                            <td>free seo audit tool</td>
+                            <td>6,750</td>
+                            <td>38</td>
+                            <td>Commercial</td>
+                            <td>Not ranking</td>
+                            <td>-</td>
+                            <td>ubersuggest.com</td>
+                            <td>1</td>
+                            <td>/seo-audit</td>
+                            <td>seositecheckup.com</td>
+                            <td>2</td>
+                            <td>/</td>
+                            <td>Tool Gap</td>
+                            <td>78</td>
+                            <td>High</td>
+                            <td>No</td>
+                            <td>-</td>
+                            <td>Develop free audit tool</td>
+                        </tr>
+                        <tr class="competitor-gap">
+                            <td>seo audit report template</td>
+                            <td>4,200</td>
+                            <td>41</td>
+                            <td>Commercial</td>
+                            <td>8</td>
+                            <td>/seo-templates</td>
+                            <td>hubspot.com</td>
+                            <td>1</td>
+                            <td>/seo-report-template</td>
+                            <td>wordstream.com</td>
+                            <td>5</td>
+                            <td>/seo-audit-template</td>
+                            <td>Content Quality</td>
+                            <td>65</td>
+                            <td>Medium</td>
+                            <td>Yes</td>
+                            <td>Average</td>
+                            <td>Enhance with visuals</td>
+                        </tr>
+                        <tr class="low-priority">
+                            <td>website audit checklist</td>
+                            <td>2,100</td>
+                            <td>35</td>
+                            <td>Informational</td>
+                            <td>12</td>
+                            <td>/website-audit</td>
+                            <td>screaming-frog.co.uk</td>
+                            <td>3</td>
+                            <td>/seo-audit</td>
+                            <td>deepcrawl.com</td>
+                            <td>6</td>
+                            <td>/guides/seo-audit</td>
+                            <td>Minor Gap</td>
+                            <td>45</td>
+                            <td>Low</td>
+                            <td>Yes</td>
+                            <td>Good</td>
+                            <td>Minor updates needed</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="section-title">
+            🏆 Worksheet 2: Competitor Content Analysis
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Competitor</th>
+                        <th>Content Title</th>
+                        <th>URL</th>
+                        <th>Content Type</th>
+                        <th>Word Count</th>
+                        <th>Target Keywords</th>
+                        <th>Ranking Position</th>
+                        <th>Est. Traffic</th>
+                        <th>Content Quality</th>
+                        <th>Unique Features</th>
+                        <th>Content Format</th>
+                        <th>Last Updated</th>
+                        <th>Backlinks</th>
+                        <th>Social Shares</th>
+                        <th>Gap Opportunity</th>
+                        <th>Our Response</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Semrush</td>
+                        <td>Complete SEO Audit Guide</td>
+                        <td>/blog/seo-audit-guide</td>
+                        <td>Guide</td>
+                        <td>4,500</td>
+                        <td>seo audit, audit guide</td>
+                        <td>1</td>
+                        <td>15,000/mo</td>
+                        <td>Excellent</td>
+                        <td>Interactive checklist, video</td>
+                        <td>Text + Video</td>
+                        <td>2025-04-15</td>
+                        <td>245</td>
+                        <td>1,200</td>
+                        <td>Add interactive elements</td>
+                        <td>Create better visual guide</td>
+                    </tr>
+                    <tr>
+                        <td>Ahrefs</td>
+                        <td>Technical SEO Audit</td>
+                        <td>/blog/technical-seo-audit</td>
+                        <td>Tutorial</td>
+                        <td>6,200</td>
+                        <td>technical seo, audit</td>
+                        <td>2</td>
+                        <td>8,500/mo</td>
+                        <td>Excellent</td>
+                        <td>Step-by-step screenshots</td>
+                        <td>Text + Images</td>
+                        <td>2025-03-22</td>
+                        <td>387</td>
+                        <td>850</td>
+                        <td>More actionable examples</td>
+                        <td>Create video walkthrough</td>
+                    </tr>
+                    <tr>
+                        <td>Moz</td>
+                        <td>Local SEO Audit Checklist</td>
+                        <td>/learn/seo/local-seo-audit</td>
+                        <td>Checklist</td>
+                        <td>3,800</td>
+                        <td>local seo audit</td>
+                        <td>1</td>
+                        <td>5,200/mo</td>
+                        <td>Good</td>
+                        <td>Downloadable PDF</td>
+                        <td>Text + PDF</td>
+                        <td>2025-02-10</td>
+                        <td>156</td>
+                        <td>420</td>
+                        <td>More local examples</td>
+                        <td>Industry-specific guides</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-title">
+            🎨 Worksheet 3: Topic Cluster Analysis
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pillar Topic</th>
+                        <th>Pillar Page URL</th>
+                        <th>Cluster Subtopic</th>
+                        <th>Target Keyword</th>
+                        <th>Search Volume</th>
+                        <th>Content Status</th>
+                        <th>Current URL</th>
+                        <th>Current Ranking</th>
+                        <th>Gap Identified</th>
+                        <th>Competitor Coverage</th>
+                        <th>Priority Level</th>
+                        <th>Content Format</th>
+                        <th>Est. Traffic Potential</th>
+                        <th>Action Required</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="high-priority">
+                        <td>SEO Audit</td>
+                        <td>/seo-audit-guide</td>
+                        <td>Technical SEO Audit</td>
+                        <td>technical seo checklist</td>
+                        <td>9,500</td>
+                        <td>Missing</td>
+                        <td>-</td>
+                        <td>Not ranking</td>
+                        <td>Complete gap</td>
+                        <td>3 competitors rank</td>
+                        <td>High</td>
+                        <td>Interactive checklist</td>
+                        <td>2,800/mo</td>
+                        <td>Create new content</td>
+                    </tr>
+                    <tr class="medium-priority">
+                        <td>SEO Audit</td>
+                        <td>/seo-audit-guide</td>
+                        <td>On-Page SEO Audit</td>
+                        <td>on page seo audit</td>
+                        <td>6,750</td>
+                        <td>Exists</td>
+                        <td>/on-page-audit</td>
+                        <td>12</td>
+                        <td>Ranking gap</td>
+                        <td>2 competitors ahead</td>
+                        <td>Medium</td>
+                        <td>Guide + Template</td>
+                        <td>1,950/mo</td>
+                        <td>Optimize existing</td>
+                    </tr>
+                    <tr class="keyword-opportunity">
+                        <td>SEO Tools</td>
+                        <td>/seo-tools</td>
+                        <td>Free SEO Tools</td>
+                        <td>free seo audit tools</td>
+                        <td>8,200</td>
+                        <td>Partial</td>
+                        <td>/free-tools</td>
+                        <td>25</td>
+                        <td>Content depth gap</td>
+                        <td>Strong competition</td>
+                        <td>High</td>
+                        <td>Tool directory</td>
+                        <td>2,100/mo</td>
+                        <td>Expand content</td>
+                    </tr>
+                    <tr class="competitor-gap">
+                        <td>Local SEO</td>
+                        <td>/local-seo</td>
+                        <td>GMB Optimization</td>
+                        <td>google my business optimization</td>
+                        <td>4,500</td>
+                        <td>Outdated</td>
+                        <td>/gmb-guide</td>
+                        <td>18</td>
+                        <td>Content freshness</td>
+                        <td>1 competitor leads</td>
+                        <td>Medium</td>
+                        <td>Step-by-step guide</td>
+                        <td>1,200/mo</td>
+                        <td>Update and expand</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-title">
+            💡 Worksheet 4: Content Opportunities Matrix
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Opportunity ID</th>
+                        <th>Content Topic</th>
+                        <th>Primary Keyword</th>
+                        <th>Secondary Keywords</th>
+                        <th>Search Intent</th>
+                        <th>Competition Level</th>
+                        <th>Our Authority</th>
+                        <th>Traffic Potential</th>
+                        <th>Business Impact</th>
+                        <th>Resource Required</th>
+                        <th>Timeline</th>
+                        <th>Content Type</th>
+                        <th>Unique Angle</th>
+                        <th>Success Metrics</th>
+                        <th>Priority Score</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="high-priority">
+                        <td>OPP-001</td>
+                        <td>SEO Audit Automation</td>
+                        <td>automated seo audit</td>
+                        <td>seo automation, audit tools</td>
+                        <td>Commercial</td>
+                        <td>Medium</td>
+                        <td>High</td>
+                        <td>High</td>
+                        <td>High</td>
+                        <td>High</td>
+                        <td>6 weeks</td>
+                        <td>Tool + Guide</td>
+                        <td>Free automation tools</td>
+                        <td>Rankings, conversions</td>
+                        <td>92</td>
+                        <td>Planned</td>
+                    </tr>
+                    <tr class="medium-priority">
+                        <td>OPP-002</td>
+                        <td>E-commerce SEO Audit</td>
+                        <td>ecommerce seo audit</td>
+                        <td>shopify seo, woocommerce seo</td>
+                        <td>Informational</td>
+                        <td>Medium</td>
+                        <td>Medium</td>
+                        <td>Medium</td>
+                        <td>High</td>
+                        <td>Medium</td>
+                        <td>4 weeks</td>
+                        <td>Guide + Template</td>
+                        <td>Platform-specific tips</td>
+                        <td>Rankings, leads</td>
+                        <td>78</td>
+                        <td>In Progress</td>
+                    </tr>
+                    <tr class="keyword-opportunity">
+                        <td>OPP-003</td>
+                        <td>SEO Audit Case Studies</td>
+                        <td>seo audit case study</td>
+                        <td>seo results, audit examples</td>
+                        <td>Informational</td>
+                        <td>Low</td>
+                        <td>High</td>
+                        <td>Medium</td>
+                        <td>Medium</td>
+                        <td>Low</td>
+                        <td>2 weeks</td>
+                        <td>Case Study</td>
+                        <td>Real client results</td>
+                        <td>Engagement, trust</td>
+                        <td>71</td>
+                        <td>Ready</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section-title">
+            📋 Worksheet 5: Content Gap Action Plan
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Action Item</th>
+                        <th>Related Keywords</th>
+                        <th>Content Type</th>
+                        <th>Priority</th>
+                        <th>Estimated Impact</th>
+                        <th>Resource Needed</th>
+                        <th>Assigned To</th>
+                        <th>Start Date</th>
+                        <th>Due Date</th>
+                        <th>Status</th>
+                        <th>Progress %</th>
+                        <th>Budget</th>
+                        <th>Dependencies</th>
+                        <th>Success KPIs</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="high-priority">
+                        <td>Create Technical SEO Audit Guide</td>
+                        <td>technical seo audit, technical seo checklist</td>
+                        <td>Comprehensive Guide</td>
+                        <td>High</td>
+                        <td>2,800 visitors/mo</td>
+                        <td>Content Writer + Designer</td>
+                        <td>Sarah M.</td>
+                        <td>2025-06-10</td>
+                        <td>2025-07-15</td>
+                        <td>Not Started</td>
+                        <td>0%</td>
+                        <td>$2,500</td>
+                        <td>Tool screenshots</td>
+                        <td>Top 5 ranking, 50+ backlinks</td>
+                        <td>Include video walkthrough</td>
+                    </tr>
+                    <tr class="high-priority">
+                        <td>Develop Free SEO Audit Tool</td>
+                        <td>free seo audit tool, website audit</td>
+                        <td>Interactive Tool</td>
+                        <td>High</td>
+                        <td>5,000 visitors/mo</td>
+                        <td>Developer + Designer</td>
+                        <td>Dev Team</td>
+                        <td>2025-06-15</td>
+                        <td>2025-08-30</td>
+                        <td>Planning</td>
+                        <td>10%</td>
+                        <td>$8,000</td>
+                        <td>API integrations</td>
+                        <td>1000+ tool uses/mo, 10% conversion</td>
+                        <td>Phase 1: Basic audit features</td>
+                    </tr>
+                    <tr class="medium-priority">
+                        <td>Update Local SEO Content</td>
+                        <td>local seo audit, gmb optimization</td>
+                        <td>Updated Guide</td>
+                        <td>Medium</td>
+                        <td>1,200 visitors/mo</td>
+                        <td>Content Writer</td>
+                        <td>Mark R.</td>
+                        <td>2025-06-05</td>
+                        <td>2025-06-25</td>
+                        <td>In Progress</td>
+                        <td>60%</td>
+                        <td>$800</td>
+                        <td>Recent algorithm updates</td>
+                        <td>Top 10 ranking improvement</td>
+                        <td>Add 2025 best practices</td>
+                    </tr>
+                    <tr class="medium-priority">
+                        <td>Optimize On-Page Audit Content</td>
+                        <td>on page seo audit, on page checklist</td>
+                        <td>Enhanced Guide</td>
+                        <td>Medium</td>
+                        <td>1,950 visitors/mo</td>
+                        <td>Content Writer + SEO</td>
+                        <td>Lisa K.</td>
+                        <td>2025-06-20</td>
+                        <td>2025-07-10</td>
+                        <td>Not Started</td>
+                        <td>0%</td>
+                        <td>$1,200</td>
+                        <td>Updated templates</td>
+                        <td>Top 5 ranking, +50% traffic</td>
+                        <td>Add more examples</td>
+                    </tr>
+                    <tr class="low-priority">
+                        <td>Create SEO Audit Case Studies</td>
+                        <td>seo audit case study, seo results</td>
+                        <td>Case Study Series</td>
+                        <td>Low</td>
+                        <td>800 visitors/mo</td>
+                        <td>Content Writer</td>
+                        <td>Content Team</td>
+                        <td>2025-07-01</td>
+                        <td>2025-08-15</td>
+                        <td>Not Started</td>
+                        <td>0%</td>
+                        <td>$1,500</td>
+                        <td>Client approvals</td>
+                        <td>Increased trust signals</td>
+                        <td>Use anonymized data</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="action-buttons">
+            <button onclick="downloadTemplate()">📥 Download Excel Template</button>
+            <button onclick="exportAnalysis()">📊 Export Analysis</button>
+            <button onclick="generateReport()">📋 Generate Report</button>
+            <button onclick="scheduleReview()">📅 Schedule Review</button>
+        </div>
+
+        <div class="metric-card">
+            <h3>🎯 How to Use This Content Gap Analysis Template</h3>
+            <ol>
+                <li><strong>Keyword Research:</strong> Start with comprehensive keyword research using tools like Ahrefs, SEMrush, or Google Keyword Planner</li>
+                <li><strong>Competitor Analysis:</strong> Identify top 3-5 competitors and analyze their content strategy</li>
+                <li><strong>Gap Identification:</strong> Compare your content against competitors to find gaps</li>
+                <li><strong>Prioritization:</strong> Score opportunities based on search volume, competition, and business impact</li>
+                <li><strong>Action Planning:</strong> Create detailed action plans with timelines and resource allocation</li>
+                <li><strong>Regular Reviews:</strong> Update the analysis monthly to track progress and identify new opportunities</li>
+            </ol>
+        </div>
+
+        <div class="metric-card">
+            <h3>📈 Key Metrics to Track</h3>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-label">Content Gap Score</div>
+                    <div style="font-size: 14px;">Based on search volume, competition, and opportunity</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Priority Matrix</div>
+                    <div style="font-size: 14px;">High/Medium/Low priority classification</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Traffic Potential</div>
+                    <div style="font-size: 14px;">Estimated monthly organic traffic gain</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Resource Requirements</div>
+                    <div style="font-size: 14px;">Time, budget, and team allocation needed</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showWorksheet(num) {
+            // Toggle worksheet visibility
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function downloadTemplate() {
+            alert('Excel template structure displayed above. Create Excel file with 5 worksheets following the table structures shown.');
+        }
+
+        function exportAnalysis() {
+            alert('Export current gap analysis data to CSV or PDF format for sharing with stakeholders.');
+        }
+
+        function generateReport() {
+            alert('Generate executive summary report highlighting top content opportunities and recommended actions.');
+        }
+
+        function scheduleReview() {
+            alert('Set up monthly review cycles to reassess content gaps and update priorities based on market changes.');
+        }
+    </script>
+</body>
+</html>
