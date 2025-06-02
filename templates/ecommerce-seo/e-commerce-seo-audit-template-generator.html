@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce SEO Audit Template</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            flex-wrap: wrap;
+        }
+        .tab {
+            flex: 1;
+            min-width: 120px;
+            padding: 12px 15px;
+            text-align: center;
+            cursor: pointer;
+            background: #f8f9fa;
+            border: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .tab:hover {
+            background: #e9ecef;
+        }
+        .tab.active {
+            background: white;
+            color: #e74c3c;
+            border-bottom: 3px solid #e74c3c;
+        }
+        .tab-content {
+            display: none;
+            padding: 30px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .audit-section {
+            margin-bottom: 30px;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .section-header {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .section-score {
+            background: #e74c3c;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .audit-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            border-bottom: 1px solid #f1f3f4;
+        }
+        .audit-item:last-child {
+            border-bottom: none;
+        }
+        .audit-item input[type="checkbox"] {
+            margin-right: 12px;
+            transform: scale(1.2);
+            accent-color: #e74c3c;
+        }
+        .audit-item label {
+            flex: 1;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .status-select {
+            margin-left: 12px;
+            padding: 4px 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .priority-critical { border-left: 4px solid #e74c3c; }
+        .priority-high { border-left: 4px solid #f39c12; }
+        .priority-medium { border-left: 4px solid #3498db; }
+        .priority-low { border-left: 4px solid #27ae60; }
+        
+        .info-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .info-card h3 {
+            margin: 0 0 15px 0;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .form-group textarea {
+            height: 80px;
+            resize: vertical;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .btn {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: transform 0.2s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+        }
+        .score-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .score-card {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .score-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 2em;
+        }
+        .score-card p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 0.9em;
+        }
+        .score-card.critical {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+        .score-card.warning {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+        }
+        .score-card.good {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .data-table th, .data-table td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 13px;
+        }
+        .data-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+        .issue-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+        .issue-critical { background: #fee; color: #c0392b; }
+        .issue-high { background: #fef3e0; color: #e67e22; }
+        .issue-medium { background: #e8f4f8; color: #2980b9; }
+        .issue-low { background: #e8f6f3; color: #27ae60; }
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #ecf0f1;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #e74c3c 0%, #27ae60 100%);
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛒 E-commerce SEO Audit Template</h1>
+            <p>Comprehensive online store optimization assessment</p>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('overview')">Overview</button>
+            <button class="tab" onclick="showTab('technical')">Technical</button>
+            <button class="tab" onclick="showTab('products')">Products</button>
+            <button class="tab" onclick="showTab('categories')">Categories</button>
+            <button class="tab" onclick="showTab('content')">Content</button>
+            <button class="tab" onclick="showTab('performance')">Performance</button>
+            <button class="tab" onclick="showTab('conversion')">Conversion</button>
+            <button class="tab" onclick="showTab('report')">Report</button>
+        </div>
+
+        <div id="overview" class="tab-content active">
+            <div class="info-card">
+                <h3>🏪 Store Information</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Store Name</label>
+                        <input type="text" id="storeName" placeholder="Enter store name">
+                    </div>
+                    <div class="form-group">
+                        <label>Store URL</label>
+                        <input type="url" id="storeUrl" placeholder="https://example.com">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>E-commerce Platform</label>
+                        <select id="platform">
+                            <option>Shopify</option>
+                            <option>WooCommerce</option>
+                            <option>Magento</option>
+                            <option>BigCommerce</option>
+                            <option>Squarespace</option>
+                            <option>Custom</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Number of Products</label>
+                        <input type="number" id="productCount" placeholder="e.g., 250">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Primary Product Categories</label>
+                        <textarea id="primaryCategories" placeholder="List main product categories"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Target Markets</label>
+                        <textarea id="targetMarkets" placeholder="Geographic markets and demographics"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="score-dashboard">
+                <div class="score-card" id="overallScoreCard">
+                    <h3 id="overallScore">0%</h3>
+                    <p>Overall SEO Score</p>
+                </div>
+                <div class="score-card" id="technicalScoreCard">
+                    <h3 id="technicalScore">0%</h3>
+                    <p>Technical Health</p>
+                </div>
+                <div class="score-card" id="contentScoreCard">
+                    <h3 id="contentScore">0%</h3>
+                    <p>Content Quality</p>
+                </div>
+                <div class="score-card" id="performanceScoreCard">
+                    <h3 id="performanceScore">0%</h3>
+                    <p>Site Performance</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3>🔍 Quick Assessment</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Area</th>
+                            <th>Status</th>
+                            <th>Priority</th>
+                            <th>Issues Found</th>
+                        </tr>
+                    </thead>
+                    <tbody id="quickAssessmentTable">
+                        <tr>
+                            <td>Technical SEO</td>
+                            <td><span class="issue-tag issue-medium">In Progress</span></td>
+                            <td>High</td>
+                            <td id="technicalIssues">0</td>
+                        </tr>
+                        <tr>
+                            <td>Product Optimization</td>
+                            <td><span class="issue-tag issue-high">Needs Work</span></td>
+                            <td>Critical</td>
+                            <td id="productIssues">0</td>
+                        </tr>
+                        <tr>
+                            <td>Site Performance</td>
+                            <td><span class="issue-tag issue-low">Good</span></td>
+                            <td>Medium</td>
+                            <td id="performanceIssues">0</td>
+                        </tr>
+                        <tr>
+                            <td>Content Strategy</td>
+                            <td><span class="issue-tag issue-medium">In Progress</span></td>
+                            <td>High</td>
+                            <td id="contentIssues">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="technical" class="tab-content">
+            <div class="audit-section priority-critical">
+                <div class="section-header">
+                    <span>⚙️ Technical Foundation</span>
+                    <span class="section-score" id="techFoundationScore">0%</span>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="tech1" onchange="updateTechnicalScore()">
+                    <label for="tech1">SSL certificate properly configured</label>
+                    <select class="status-select">
+                        <option>Not Implemented</option>
+                        <option>Partially Configured</option>
+                        <option>Fully Configured</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="tech2" onchange="updateTechnicalScore()">
+                    <label for="tech2">XML sitemap exists and is submitted</label>
+                    <select class="status-select">
+                        <option>No Sitemap</option>
+                        <option>Sitemap Exists</option>
+                        <option>Submitted to GSC</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="tech3" onchange="updateTechnicalScore()">
+                    <label for="tech3">Robots.txt properly configured</label>
+                    <select class="status-select">
+                        <option>Missing/Incorrect</option>
+                        <option>Basic Configuration</option>
+                        <option>Optimized</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="tech4" onchange="updateTechnicalScore()">
+                    <label for="tech4">Canonical tags implemented correctly</label>
+                    <select class="status-select">
+                        <option>Not Implemented</option>
+                        <option>Partially Implemented</option>
+                        <option>Fully Implemented</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="tech5" onchange="updateTechnicalScore()">
+                    <label for="tech5">HTTPS redirect chains optimized</label>
+                    <select class="status-select">
+                        <option>Multiple Redirects</option>
+                        <option>Some Redirects</option>
+                        <option>Optimized</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="audit-section priority-high">
+                <div class="section-header">
+                    <span>📱 Mobile & Crawlability</span>
+                    <span class="section-score" id="mobileCrawlScore">0%</span>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="mobile1" onchange="updateTechnicalScore()">
+                    <label for="mobile1">Mobile-first design implemented</label>
+                    <select class="status-select">
+                        <option>Not Mobile-Friendly</option>
+                        <option>Partially Responsive</option>
+                        <option>Fully Responsive</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="mobile2" onchange="updateTechnicalScore()">
+                    <label for="mobile2">Page speed optimized (Core Web Vitals)</label>
+                    <select class="status-select">
+                        <option>Poor (<50)</option>
+                        <option>Needs Work (50-89)</option>
+                        <option>Good (90+)</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="mobile3" onchange="updateTechnicalScore()">
+                    <label for="mobile3">Crawl budget optimization</label>
+                    <select class="status-select">
+                        <option>Not Optimized</option>
+                        <option>Basic Optimization</option>
+                        <option>Fully Optimized</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="mobile4" onchange="updateTechnicalScore()">
+                    <label for="mobile4">Faceted navigation SEO issues</label>
+                    <select class="status-select">
+                        <option>Major Issues</option>
+                        <option>Minor Issues</option>
+                        <option>No Issues</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="audit-section priority-medium">
+                <div class="section-header">
+                    <span>🔗 URL Structure & Internal Linking</span>
+                    <span class="section-score" id="urlStructureScore">0%</span>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="url1" onchange="updateTechnicalScore()">
+                    <label for="url1">SEO-friendly URL structure</label>
+                    <select class="status-select">
+                        <option>Poor Structure</option>
+                        <option>Acceptable</option>
+                        <option>Optimized</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="url2" onchange="updateTechnicalScore()">
+                    <label for="url2">Consistent URL parameters handling</label>
+                    <select class="status-select">
+                        <option>Issues Present</option>
+                        <option>Mostly Clean</option>
+                        <option>Clean URLs</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="url3" onchange="updateTechnicalScore()">
+                    <label for="url3">Breadcrumb navigation implemented</label>
+                    <select class="status-select">
+                        <option>Not Implemented</option>
+                        <option>Basic Implementation</option>
+                        <option>Structured Data</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="url4" onchange="updateTechnicalScore()">
+                    <label for="url4">Internal linking strategy optimized</label>
+                    <select class="status-select">
+                        <option>Poor Strategy</option>
+                        <option>Basic Strategy</option>
+                        <option>Optimized Strategy</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div id="products" class="tab-content">
+            <div class="audit-section priority-critical">
+                <div class="section-header">
+                    <span>🛍️ Product Page Optimization</span>
+                    <span class="section-score" id="productOptScore">0%</span>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="prod1" onchange="updateProductScore()">
+                    <label for="prod1">Unique product titles with target keywords</label>
+                    <select class="status-select">
+                        <option>Generic/Duplicate</option>
+                        <option>Partially Optimized</option>
+                        <option>Fully Optimized</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="prod2" onchange="updateProductScore()">
+                    <label for="prod2">Compelling meta descriptions (155-160 chars)</label>
+                    <select class="status-select">
+                        <option>Missing/Poor</option>
+                        <option>Basic Descriptions</option>
+                        <option>Optimized Descriptions</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="prod3" onchange="updateProductScore()">
+                    <label for="prod3">Detailed product descriptions (200+ words)</label>
+                    <select class="status-select">
+                        <option>Thin Content</option>
+                        <option>Adequate Content</option>
+                        <option>Rich Content</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="prod4" onchange="updateProductScore()">
+                    <label for="prod4">High-quality product images with alt text</label>
+                    <select class="status-select">
+                        <option>Poor Quality/No Alt</option>
+                        <option>Good Quality</option>
+                        <option>Optimized Images</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="prod5" onchange="updateProductScore()">
+                    <label for="prod5">Product schema markup implemented</label>
+                    <select class="status-select">
+                        <option>Not Implemented</option>
+                        <option>Basic Schema</option>
+                        <option>Rich Schema</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="prod6" onchange="updateProductScore()">
+                    <label for="prod6">Customer reviews integration</label>
+                    <select class="status-select">
+                        <option>No Reviews</option>
+                        <option>Basic Reviews</option>
+                        <option>Schema Reviews</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="audit-section priority-high">
+                <div class="section-header">
+                    <span>💰 Pricing & Availability</span>
+                    <span class="section-score" id="pricingScore">0%</span>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="price1" onchange="updateProductScore()">
+                    <label for="price1">Clear pricing display</label>
+					                <select class="status-select">
+                    <option>Not Visible</option>
+                    <option>Visible but Cluttered</option>
+                    <option>Clear Display</option>
+                </select>
+            </div>
+            <div class="audit-item">
+                <input type="checkbox" id="price2" onchange="updateProductScore()">
+                <label for="price2">Stock availability clearly indicated</label>
+                <select class="status-select">
+                    <option>No Stock Info</option>
+                    <option>Basic Stock Info</option>
+                    <option>Real-Time Stock</option>
+                </select>
+            </div>
+            <div class="audit-item">
+                <input type="checkbox" id="price3" onchange="updateProductScore()">
+                <label for="price3">Promotions and discounts highlighted</label>
+                <select class="status-select">
+                    <option>No Promotions</option>
+                    <option>Some Promotions</option>
+                    <option>Clearly Highlighted</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div id="categories" class="tab-content">
+        <div class="audit-section priority-high">
+            <div class="section-header">
+                <span>📂 Category Page Optimization</span>
+                <span class="section-score" id="categoryOptScore">0%</span>
+            </div>
+            <div class="audit-item">
+                <input type="checkbox" id="cat1" onchange="updateCategoryScore()">
+                <label for="cat1">Unique category titles with keywords</label>
+                <select class="status-select">
+                    <option>Generic/Duplicate</option>
+                    <option>Partially Optimized</option>
+                    <option>Fully Optimized</option>
+                </select>
+            </div>
+            <div class="audit-item">
+                <input type="checkbox" id="cat2" onchange="updateCategoryScore()">
+                <label for="cat2">Descriptive meta descriptions (120-155 chars)</label>
+                <select class="status-select">
+                    <option>Missing/Poor</option>
+                    <option>Basic</option>
+                    <option>Optimized</option>
+                </select>
+            </div>
+            <div class="audit-item">
+                <input type="checkbox" id="cat3" onchange="updateCategoryScore()">
+                <label for="cat3">Category descriptions (200+ words)</label>
+                <select class="status-select">
+                    <option>Thin Content</option>
+                    <option>Adequate Content</option>
+                    <option>Rich Content</option>
+                </select>
+            </div>
+            <div class="audit-item">
+                <input type="checkbox" id="cat4" onchange="updateCategoryScore()">
+                <label for="cat4">Pagination & canonical tags handled</label>
+                <select class="status-select">
+                    <option>Not Implemented</option>
+                    <option>Basic</option>
+                    <option>Optimized</option>
+                </select>
+            </div>
+            <div class="audit-item">
+                <input type="checkbox" id="cat5" onchange="updateCategoryScore()">
+                <label for="cat5">Internal links to subcategories/products</label>
+                <select class="status-select">
+                    <option>Poor Strategy</option>
+                    <option>Basic</option>
+                    <option>Optimized</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div id="content" class="tab-content">
+        <div class="audit-section priority-medium">
+            <div class="section-header">
+                <span>✍️ Content & Blog Strategy</span>
+                <span class="section-score" id="contentOptScore">0%</span>
+            </div>
+            <div class="audit-item">
+                <input type="checkbox" id="cont1" onchange="updateContentScore()">
+                <label for="cont1">Blog integration with target keywords</label>
+                <select class="status-select">
+                    <option>No Blog</option>
+                    <option>Basic Posts</option>
+                    <option>SEO-Optimized Posts</option>
+                </select>
+            </div>
+            <div class="audit-item">
+                <input type="checkbox" id="cont2" onchange="updateContentScore()">
+                <label for="cont2">Guides/tutorials with long-tail keywords</label>
+                <select class="status-select">
+                    <option>None</option>
+                    <option>Some Guides</option>
+                    <option>Well-Structured Guides</option>
+                </select>
+            </div>
+            <div class="audit-item">
+                <input type="checkbox" id="cont3" onchange="updateContentScore()">
+                <label for="cont3">Content calendar consistency</label>
+                <select class="status-select">
+                    <option>No Calendar</option>
+                    <option>Inconsistent</option>
+                    <option>Regular Publishing</option>
+                </select>
+            </div>
+            <div class="audit-item">
+                <input type="checkbox" id="cont4" onchange="updateContentScore()">
+                <label for="cont4">Multimedia usage (images, videos)</label>
+                <select class="status-select">
+                    <option>None</option>
+                    <option>Basic Usage</option>
+                    <option>Optimized Usage</option>
+                </select>
+            </div>
+            <div class="audit-item">
+                <input type="checkbox" id="cont5" onchange="updateContentScore()">
+                <label for="cont5">Outbound/internal linking in posts</label>
+                <select class="status-select">
+                    <option>Poor</option>
+                    <option>Basic</option>
+                    <option>Optimized</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div id="performance" class="tab-content">
+        <div class="audit-section priority-critical">
+            <div class="section-header">
+                <span>🚀 Site Performance & Speed</span>
+                <span class="section-score" id="performanceOptScore">0%</span>
+            </div>
+            <div class="audit-item">
+                <input type="checkbox" id="perf1" onchange="updatePerformanceScore()">
+                <label for="perf1">Page speed (desktop & mobile) with Core Web Vitals</label>
+                <select class="status-select">
+                    <option>Poor (<50)</option>
+                    <option>Needs Work (50-89)</option>
+                    <option>Good (90+)</option>
+                </select>
+            </div>
+            <div class="audit-item">
+                <input type="checkbox" id="perf2" onchange="updatePerformanceScore()">
+                <label for="perf2">Image optimization (compression, next-gen formats)</label>
+                <select class="status-select">
+                    <option>Not Optimized</option>
+                    <option>Partially</option>
+                    <option>Fully Optimized</option>
+                </select>
+            </div>
+            <div class="audit-item">
+                <input type="checkbox" id="perf3" onchange="updatePerformanceScore()">
+                <label for="perf3">Browser caching enabled</label>
+                <select class="status-select">
+                    <option>Not Enabled</option>
+                    <option>Basic Caching</option>
+                    <option>Optimal Caching</option>
+                </select>
+            </div>
+            <div class="audit-item">
+                <input type="checkbox" id="perf4" onchange="updatePerformanceScore()">
+                <label for="perf4">Minification of CSS/JS</label>
+                <select class="status-select">
+                    <option>Not Minified</option>
+                    <option>Partially</option>
+                    <option>Fully Minified</option>
+                </select>
+            </div>
+            <div class="audit-item">
+                <input type="checkbox" id="perf5" onchange="updatePerformanceScore()">
+                <label for="perf5">CDN usage</label>
+                <select class="status-select">
+                    <option>No CDN</option>
+                    <option>Basic CDN</option>
+                    <option>Global CDN</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div id="conversion" class="tab-content">
+        <div class="audit-section priority-high">
+            <div class="section-header">
+                <span>💡 Conversion Rate Optimization (CRO)</span>
+                <span class="section-score" id="conversionOptScore">0%</span>
+            </div>
+            <div class="audit-item">
+                <input type="checkbox" id="conv1" onchange="updateConversionScore()">
+                <label for="conv1">Clear CTA buttons on key pages</label>
+                <select class="status-select">
+                    <option>Not Present</option>
+                    <option>Some CTAs</option>
+                    <option>Optimized CTAs</option>
+                </select>
+            </div>
+            <div class="audit-item">
+                <input type="checkbox" id="conv2" onchange="updateConversionScore()">
+                <label for="conv2">Trust badges and security seals visible</label>
+                <select class="status-select">
+                    <option>None</option>
+                    <option>Some</option>
+                    <option>All Key Pages</option>
+                </select>
+            </div>
+            <div class="audit-item">
+                <input type="checkbox" id="conv3" onchange="updateConversionScore()">
+                <label for="conv3">Simple & intuitive checkout flow</label>
+                <select class="status-select">
+                    <option>Complex</option>
+                    <option>Some Simplifications</option>
+                    <option>Fully Optimized</option>
+                </select>
+            </div>
+            <div class="audit-item">
+                <input type="checkbox" id="conv4" onchange="updateConversionScore()">
+                <label for="conv4">A/B testing in place</label>
+                <select class="status-select">
+                    <option>No Tests</option>
+                    <option>Occasional</option>
+                    <option>Regular & Documented</option>
+                </select>
+            </div>
+            <div class="audit-item">
+                <input type="checkbox" id="conv5" onchange="updateConversionScore()">
+                <label for="conv5">Analytics & tracking setup</label>
+                <select class="status-select">
+                    <option>Not Set</option>
+                    <option>Basic</option>
+                    <option>Advanced</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div id="report" class="tab-content">
+        <div class="info-card">
+            <h3>📝 Export & Summary</h3>
+            <div class="form-group">
+                <label>Report Title</label>
+                <input type="text" id="reportTitle" placeholder="June 2025 SEO Audit Report">
+            </div>
+            <div class="form-group">
+                <label>Summary Notes</label>
+                <textarea id="summaryNotes" placeholder="Enter key findings and recommendations"></textarea>
+            </div>
+            <button class="btn" onclick="generateReport()">Generate PDF/CSV Report</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Tab Switching
+    function showTab(tabId) {
+        const tabs = document.querySelectorAll('.tab');
+        const contents = document.querySelectorAll('.tab-content');
+        tabs.forEach(tab => {
+            tab.classList.remove('active');
+            if (tab.getAttribute('onclick').includes(tabId)) {
+                tab.classList.add('active');
+            }
+        });
+        contents.forEach(content => {
+            content.classList.remove('active');
+            if (content.id === tabId) {
+                content.classList.add('active');
+            }
+        });
+    }
+
+    // Utility: Calculate percentage based on checked items / total items in a section
+    function calculateSectionScore(sectionIdPrefix, totalItems) {
+        let checkedCount = 0;
+        for (let i = 1; i <= totalItems; i++) {
+            const checkbox = document.getElementById(sectionIdPrefix + i);
+            if (checkbox && checkbox.checked) checkedCount++;
+        }
+        return totalItems > 0 ? Math.round((checkedCount / totalItems) * 100) : 0;
+    }
+
+    // Technical Score (5 foundation + 4 mobile/crawl + 4 URL/internal = 13 items)
+    function updateTechnicalScore() {
+        const totalTechItems = 13;
+        const techChecked = calculateSectionScore('tech', 5);
+        const mobileChecked = calculateSectionScore('mobile', 4);
+        const urlChecked = calculateSectionScore('url', 4);
+        // Each subscore is percentage; weight equally by item count
+        const foundationScore = techChecked;
+        const mobileScore = mobileChecked;
+        const urlScore = urlChecked;
+        const composite = Math.round(((foundationScore * 5) + (mobileScore * 4) + (urlScore * 4)) / totalTechItems);
+        document.getElementById('techFoundationScore').innerText = foundationScore + '%';
+        document.getElementById('mobileCrawlScore').innerText = mobileScore + '%';
+        document.getElementById('urlStructureScore').innerText = urlScore + '%';
+        document.getElementById('technicalScore').innerText = composite + '%';
+        document.getElementById('technicalScoreCard').querySelector('h3').innerText = composite + '%';
+        // Update quick assessment table count
+        document.getElementById('technicalIssues').innerText = totalTechItems - ((foundationScore * 5 + mobileScore * 4 + urlScore * 4) / 100 * totalTechItems);
+    }
+
+    // Product Score (6 product page + 3 pricing = 9 items)
+    function updateProductScore() {
+        const totalProdItems = 9;
+        const prodChecked = calculateSectionScore('prod', 6);
+        const priceChecked = calculateSectionScore('price', 3);
+        const composite = Math.round(((prodChecked * 6) + (priceChecked * 3)) / totalProdItems);
+        document.getElementById('productOptScore').innerText = prodChecked + '%';
+        document.getElementById('pricingScore').innerText = priceChecked + '%';
+        document.getElementById('productIssues').innerText = totalProdItems - ((prodChecked * 6 + priceChecked * 3) / 100 * totalProdItems);
+        // Update overall product score card (will combine later)
+    }
+
+    // Category Score (5 items)
+    function updateCategoryScore() {
+        const totalCatItems = 5;
+        const catChecked = calculateSectionScore('cat', totalCatItems);
+        document.getElementById('categoryOptScore').innerText = catChecked + '%';
+    }
+
+    // Content Score (5 items)
+    function updateContentScore() {
+        const totalContItems = 5;
+        const contChecked = calculateSectionScore('cont', totalContItems);
+        document.getElementById('contentOptScore').innerText = contChecked + '%';
+        document.getElementById('contentScore').innerText = contChecked + '%';
+        document.getElementById('contentIssues').innerText = totalContItems - (contChecked / 100 * totalContItems);
+        document.getElementById('contentScoreCard').querySelector('h3').innerText = contChecked + '%';
+    }
+
+    // Performance Score (5 items)
+    function updatePerformanceScore() {
+        const totalPerfItems = 5;
+        const perfChecked = calculateSectionScore('perf', totalPerfItems);
+        document.getElementById('performanceOptScore').innerText = perfChecked + '%';
+        document.getElementById('performanceScore').innerText = perfChecked + '%';
+        document.getElementById('performanceIssues').innerText = totalPerfItems - (perfChecked / 100 * totalPerfItems);
+        document.getElementById('performanceScoreCard').querySelector('h3').innerText = perfChecked + '%';
+    }
+
+    // Conversion Score (5 items)
+    function updateConversionScore() {
+        const totalConvItems = 5;
+        const convChecked = calculateSectionScore('conv', totalConvItems);
+        document.getElementById('conversionOptScore').innerText = convChecked + '%';
+    }
+
+    // Overall Score recalculation on any update
+    function updateOverallScore() {
+        const techScore = parseInt(document.getElementById('technicalScore').innerText) || 0;
+        const contentScore = parseInt(document.getElementById('contentScore').innerText) || 0;
+        const perfScore = parseInt(document.getElementById('performanceScore').innerText) || 0;
+        // Weight evenly among technical, content, performance for overall
+        const overall = Math.round((techScore + contentScore + perfScore) / 3);
+        document.getElementById('overallScore').innerText = overall + '%';
+        document.getElementById('overallScoreCard').querySelector('h3').innerText = overall + '%';
+    }
+
+    // Attach listeners to recalc overall whenever sub-scores change
+    const scoreInputs = document.querySelectorAll('input[type="checkbox"]');
+    scoreInputs.forEach(input => {
+        input.addEventListener('change', updateOverallScore);
+    });
+
+    // Generate Report (placeholder functionality)
+    function generateReport() {
+        const title = document.getElementById('reportTitle').value || 'SEO Audit Report';
+        const notes = document.getElementById('summaryNotes').value || '';
+        alert(`Report "${title}" generated.\n\nSummary:\n${notes}`);
+        // Future: integrate PDF/CSV generation libraries here
+    }
+</script>
+</body>
+</html>
