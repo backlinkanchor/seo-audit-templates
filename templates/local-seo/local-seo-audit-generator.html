@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local SEO Audit Template</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .tab {
+            flex: 1;
+            padding: 15px 20px;
+            text-align: center;
+            cursor: pointer;
+            background: #f8f9fa;
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .tab:hover {
+            background: #e9ecef;
+        }
+        .tab.active {
+            background: white;
+            color: #3498db;
+            border-bottom: 3px solid #3498db;
+        }
+        .tab-content {
+            display: none;
+            padding: 30px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .audit-section {
+            margin-bottom: 30px;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .section-header {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .audit-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            border-bottom: 1px solid #f1f3f4;
+        }
+        .audit-item:last-child {
+            border-bottom: none;
+        }
+        .audit-item input[type="checkbox"] {
+            margin-right: 12px;
+            transform: scale(1.2);
+        }
+        .audit-item label {
+            flex: 1;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .status-select {
+            margin-left: 12px;
+            padding: 4px 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .priority-high { border-left: 4px solid #e74c3c; }
+        .priority-medium { border-left: 4px solid #f39c12; }
+        .priority-low { border-left: 4px solid #27ae60; }
+        
+        .info-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .info-card h3 {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .form-group textarea {
+            height: 80px;
+            resize: vertical;
+        }
+        .btn {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: transform 0.2s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        .score-display {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .score-display h2 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .score-display p {
+            margin: 5px 0 0 0;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏪 Local SEO Audit Template</h1>
+            <p>Comprehensive local search optimization assessment</p>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('business-info')">Business Info</button>
+            <button class="tab" onclick="showTab('gmb-audit')">GMB Audit</button>
+            <button class="tab" onclick="showTab('citations')">Citations</button>
+            <button class="tab" onclick="showTab('reviews')">Reviews</button>
+            <button class="tab" onclick="showTab('on-page')">On-Page Local</button>
+            <button class="tab" onclick="showTab('technical')">Technical</button>
+            <button class="tab" onclick="showTab('report')">Report</button>
+        </div>
+
+        <div id="business-info" class="tab-content active">
+            <div class="info-card">
+                <h3>Business Information</h3>
+                <div class="form-group">
+                    <label>Business Name</label>
+                    <input type="text" id="businessName" placeholder="Enter business name">
+                </div>
+                <div class="form-group">
+                    <label>Primary Address</label>
+                    <textarea id="businessAddress" placeholder="Complete business address"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="businessPhone" placeholder="Primary business phone">
+                </div>
+                <div class="form-group">
+                    <label>Website URL</label>
+                    <input type="url" id="businessWebsite" placeholder="https://example.com">
+                </div>
+                <div class="form-group">
+                    <label>Primary Business Category</label>
+                    <select id="businessCategory">
+                        <option>Restaurant</option>
+                        <option>Retail Store</option>
+                        <option>Professional Services</option>
+                        <option>Healthcare</option>
+                        <option>Automotive</option>
+                        <option>Home Services</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Target Keywords</label>
+                    <textarea id="targetKeywords" placeholder="List primary local keywords (one per line)"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div id="gmb-audit" class="tab-content">
+            <div class="score-display">
+                <h2 id="gmbScore">0%</h2>
+                <p>Google My Business Score</p>
+            </div>
+            
+            <div class="audit-section priority-high">
+                <div class="section-header">🔍 GMB Profile Completeness</div>
+                <div class="audit-item">
+                    <input type="checkbox" id="gmb1" onchange="updateScore()">
+                    <label for="gmb1">Business name is accurate and consistent</label>
+                    <select class="status-select">
+                        <option>Not Started</option>
+                        <option>In Progress</option>
+                        <option>Completed</option>
+                        <option>Issue Found</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="gmb2" onchange="updateScore()">
+                    <label for="gmb2">Complete and accurate address</label>
+                    <select class="status-select">
+                        <option>Not Started</option>
+                        <option>In Progress</option>
+                        <option>Completed</option>
+                        <option>Issue Found</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="gmb3" onchange="updateScore()">
+                    <label for="gmb3">Correct phone number (local format)</label>
+                    <select class="status-select">
+                        <option>Not Started</option>
+                        <option>In Progress</option>
+                        <option>Completed</option>
+                        <option>Issue Found</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="gmb4" onchange="updateScore()">
+                    <label for="gmb4">Accurate business hours (including holidays)</label>
+                    <select class="status-select">
+                        <option>Not Started</option>
+                        <option>In Progress</option>
+                        <option>Completed</option>
+                        <option>Issue Found</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="gmb5" onchange="updateScore()">
+                    <label for="gmb5">Correct business category (primary + secondary)</label>
+                    <select class="status-select">
+                        <option>Not Started</option>
+                        <option>In Progress</option>
+                        <option>Completed</option>
+                        <option>Issue Found</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="gmb6" onchange="updateScore()">
+                    <label for="gmb6">Complete business description (750 chars)</label>
+                    <select class="status-select">
+                        <option>Not Started</option>
+                        <option>In Progress</option>
+                        <option>Completed</option>
+                        <option>Issue Found</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="gmb7" onchange="updateScore()">
+                    <label for="gmb7">High-quality profile photos (10+)</label>
+                    <select class="status-select">
+                        <option>Not Started</option>
+                        <option>In Progress</option>
+                        <option>Completed</option>
+                        <option>Issue Found</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="gmb8" onchange="updateScore()">
+                    <label for="gmb8">Logo uploaded and optimized</label>
+                    <select class="status-select">
+                        <option>Not Started</option>
+                        <option>In Progress</option>
+                        <option>Completed</option>
+                        <option>Issue Found</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="audit-section priority-medium">
+                <div class="section-header">⚙️ GMB Features & Settings</div>
+                <div class="audit-item">
+                    <input type="checkbox" id="gmb9" onchange="updateScore()">
+                    <label for="gmb9">GMB profile is verified</label>
+                    <select class="status-select">
+                        <option>Not Started</option>
+                        <option>In Progress</option>
+                        <option>Completed</option>
+                        <option>Issue Found</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="gmb10" onchange="updateScore()">
+                    <label for="gmb10">Services/Products listed and optimized</label>
+                    <select class="status-select">
+                        <option>Not Started</option>
+                        <option>In Progress</option>
+                        <option>Completed</option>
+                        <option>Issue Found</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="gmb11" onchange="updateScore()">
+                    <label for="gmb11">Attributes properly selected</label>
+                    <select class="status-select">
+                        <option>Not Started</option>
+                        <option>In Progress</option>
+                        <option>Completed</option>
+                        <option>Issue Found</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="gmb12" onchange="updateScore()">
+                    <label for="gmb12">Regular posts (weekly)</label>
+                    <select class="status-select">
+                        <option>Not Started</option>
+                        <option>In Progress</option>
+                        <option>Completed</option>
+                        <option>Issue Found</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="gmb13" onchange="updateScore()">
+                    <label for="gmb13">Q&A section managed</label>
+                    <select class="status-select">
+                        <option>Not Started</option>
+                        <option>In Progress</option>
+                        <option>Completed</option>
+                        <option>Issue Found</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div id="citations" class="tab-content">
+            <div class="score-display">
+                <h2 id="citationScore">0%</h2>
+                <p>Citation Consistency Score</p>
+            </div>
+            
+            <div class="audit-section priority-high">
+                <div class="section-header">📋 Major Citation Sources</div>
+                <div class="audit-item">
+                    <input type="checkbox" id="cit1" onchange="updateCitationScore()">
+                    <label for="cit1">Google My Business - Complete & Accurate</label>
+                    <select class="status-select">
+                        <option>Not Listed</option>
+                        <option>Listed - Incorrect Info</option>
+                        <option>Listed - Correct Info</option>
+                        <option>Claimed & Optimized</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="cit2" onchange="updateCitationScore()">
+                    <label for="cit2">Yelp - Business Listed</label>
+                    <select class="status-select">
+                        <option>Not Listed</option>
+                        <option>Listed - Incorrect Info</option>
+                        <option>Listed - Correct Info</option>
+                        <option>Claimed & Optimized</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="cit3" onchange="updateCitationScore()">
+                    <label for="cit3">Apple Maps - Business Listed</label>
+                    <select class="status-select">
+                        <option>Not Listed</option>
+                        <option>Listed - Incorrect Info</option>
+                        <option>Listed - Correct Info</option>
+                        <option>Claimed & Optimized</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="cit4" onchange="updateCitationScore()">
+                    <label for="cit4">Bing Places - Business Listed</label>
+                    <select class="status-select">
+                        <option>Not Listed</option>
+                        <option>Listed - Incorrect Info</option>
+                        <option>Listed - Correct Info</option>
+                        <option>Claimed & Optimized</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="cit5" onchange="updateCitationScore()">
+                    <label for="cit5">Facebook Business Page</label>
+                    <select class="status-select">
+                        <option>Not Listed</option>
+                        <option>Listed - Incorrect Info</option>
+                        <option>Listed - Correct Info</option>
+                        <option>Claimed & Optimized</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="audit-section priority-medium">
+                <div class="section-header">🏢 Industry-Specific Citations</div>
+                <div class="audit-item">
+                    <input type="checkbox" id="cit6" onchange="updateCitationScore()">
+                    <label for="cit6">Better Business Bureau (if applicable)</label>
+                    <select class="status-select">
+                        <option>Not Listed</option>
+                        <option>Listed - Incorrect Info</option>
+                        <option>Listed - Correct Info</option>
+                        <option>Claimed & Optimized</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="cit7" onchange="updateCitationScore()">
+                    <label for="cit7">Industry associations/directories</label>
+                    <select class="status-select">
+                        <option>Not Listed</option>
+                        <option>Listed - Incorrect Info</option>
+                        <option>Listed - Correct Info</option>
+                        <option>Claimed & Optimized</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="cit8" onchange="updateCitationScore()">
+                    <label for="cit8">Chamber of Commerce</label>
+                    <select class="status-select">
+                        <option>Not Listed</option>
+                        <option>Listed - Incorrect Info</option>
+                        <option>Listed - Correct Info</option>
+                        <option>Claimed & Optimized</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="cit9" onchange="updateCitationScore()">
+                    <label for="cit9">Local newspapers/media sites</label>
+                    <select class="status-select">
+                        <option>Not Listed</option>
+                        <option>Listed - Incorrect Info</option>
+                        <option>Listed - Correct Info</option>
+                        <option>Claimed & Optimized</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="cit10" onchange="updateCitationScore()">
+                    <label for="cit10">Niche directories (industry-specific)</label>
+                    <select class="status-select">
+                        <option>Not Listed</option>
+                        <option>Listed - Incorrect Info</option>
+                        <option>Listed - Correct Info</option>
+                        <option>Claimed & Optimized</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3>Citation Consistency Analysis</h3>
+                <div class="form-group">
+                    <label>Inconsistent Citations Found</label>
+                    <textarea placeholder="List any citations with incorrect NAP information"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Duplicate Listings Found</label>
+                    <textarea placeholder="List any duplicate business listings that need to be merged/removed"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Citation Opportunities</label>
+                    <textarea placeholder="List potential citation sources not yet utilized"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div id="reviews" class="tab-content">
+            <div class="score-display">
+                <h2 id="reviewScore">0%</h2>
+                <p>Review Management Score</p>
+            </div>
+
+            <div class="audit-section priority-high">
+                <div class="section-header">⭐ Review Profile Analysis</div>
+                <div class="audit-item">
+                    <input type="checkbox" id="rev1" onchange="updateReviewScore()">
+                    <label for="rev1">Overall rating above 4.0 stars</label>
+                    <select class="status-select">
+                        <option>Below 3.0</option>
+                        <option>3.0 - 3.5</option>
+                        <option>3.5 - 4.0</option>
+                        <option>Above 4.0</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="rev2" onchange="updateReviewScore()">
+                    <label for="rev2">Sufficient number of reviews (50+)</label>
+                    <select class="status-select">
+                        <option>Under 10</option>
+                        <option>10-25</option>
+                        <option>25-50</option>
+                        <option>50+</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="rev3" onchange="updateReviewScore()">
+                    <label for="rev3">Recent reviews (within 30 days)</label>
+                    <select class="status-select">
+                        <option>No recent reviews</option>
+                        <option>1-2 recent</option>
+                        <option>3-5 recent</option>
+                        <option>5+ recent</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="rev4" onchange="updateReviewScore()">
+                    <label for="rev4">Owner responses to reviews</label>
+                    <select class="status-select">
+                        <option>No responses</option>
+                        <option>Few responses</option>
+                        <option>Most reviews responded</option>
+                        <option>All reviews responded</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="rev5" onchange="updateReviewScore()">
+                    <label for="rev5">Professional response tone</label>
+                    <select class="status-select">
+                        <option>Poor/Unprofessional</option>
+                        <option>Average</option>
+                        <option>Good</option>
+                        <option>Excellent</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="audit-section priority-medium">
+                <div class="section-header">🔄 Review Management Process</div>
+                <div class="audit-item">
+                    <input type="checkbox" id="rev6" onchange="updateReviewScore()">
+                    <label for="rev6">Review solicitation process in place</label>
+                    <select class="status-select">
+                        <option>No process</option>
+                        <option>Basic process</option>
+                        <option>Good process</option>
+                        <option>Automated system</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="rev7" onchange="updateReviewScore()">
+                    <label for="rev7">Negative review resolution strategy</label>
+                    <select class="status-select">
+                        <option>No strategy</option>
+                        <option>Basic response</option>
+                        <option>Proactive resolution</option>
+                        <option>Comprehensive strategy</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="rev8" onchange="updateReviewScore()">
+                    <label for="rev8">Review monitoring across platforms</label>
+                    <select class="status-select">
+                        <option>No monitoring</option>
+                        <option>Google only</option>
+                        <option>2-3 platforms</option>
+                        <option>All major platforms</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3>Review Analysis Summary</h3>
+                <div class="form-group">
+                    <label>Current Average Rating</label>
+                    <input type="number" step="0.1" min="1" max="5" placeholder="4.2">
+                </div>
+                <div class="form-group">
+                    <label>Total Number of Reviews</label>
+                    <input type="number" placeholder="127">
+                </div>
+                <div class="form-group">
+                    <label>Negative Reviews Analysis</label>
+                    <textarea placeholder="Common themes in negative reviews and resolution recommendations"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Review Generation Recommendations</label>
+                    <textarea placeholder="Strategies to increase positive review volume"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div id="on-page" class="tab-content">
+            <div class="audit-section priority-high">
+                <div class="section-header">📄 On-Page Local SEO</div>
+                <div class="audit-item">
+                    <input type="checkbox" id="page1">
+                    <label for="page1">NAP consistent across all pages</label>
+                    <select class="status-select">
+                        <option>Not Consistent</option>
+                        <option>Mostly Consistent</option>
+                        <option>Fully Consistent</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="page2">
+                    <label for="page2">Local keywords in title tags</label>
+                    <select class="status-select">
+                        <option>Not Optimized</option>
+                        <option>Partially Optimized</option>
+                        <option>Fully Optimized</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="page3">
+                    <label for="page3">Local business schema markup</label>
+                    <select class="status-select">
+                        <option>Not Present</option>
+                        <option>Basic Schema</option>
+                        <option>Complete Schema</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="page4">
+                    <label for="page4">Contact page optimized</label>
+                    <select class="status-select">
+                        <option>Not Optimized</option>
+                        <option>Basic Optimization</option>
+                        <option>Fully Optimized</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div id="technical" class="tab-content">
+            <div class="audit-section priority-high">
+                <div class="section-header">⚙️ Technical Local SEO</div>
+                <div class="audit-item">
+                    <input type="checkbox" id="tech1">
+                    <label for="tech1">Mobile-friendly design</label>
+                    <select class="status-select">
+                        <option>Not Mobile-Friendly</option>
+                        <option>Partially Responsive</option>
+                        <option>Fully Responsive</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="tech2">
+                    <label for="tech2">Page load speed optimized</label>
+                    <select class="status-select">
+                        <option>Slow (>5s)</option>
+                        <option>Average (3-5s)</option>
+                        <option>Fast (<3s)</option>
+                    </select>
+                </div>
+                <div class="audit-item">
+                    <input type="checkbox" id="tech3">
+                    <label for="tech3">SSL certificate installed</label>
+                    <select class="status-select">
+                        <option>Not Secure</option>
+                        <option>Mixed Content</option>
+                        <option>Fully Secure</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div id="report" class="tab-content">
+            <div class="info-card">
+                <h3>📊 Audit Summary Report</h3>
+                <div class="form-group">
+                    <label>Overall Local SEO Score</label>
+                    <input type="text" id="overallScore" readonly placeholder="Calculate based on all sections">
+                </div>
+                <div class="form-group">
+                    <label>Priority Issues</label>
+                    <textarea placeholder="List the most critical issues that need immediate attention"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Quick Wins</label>
+                    <textarea placeholder="List easy-to-implement improvements with high impact"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Long-term Recommendations</label>
+                    <textarea placeholder="Strategic recommendations for ongoing local SEO improvement"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Competitor Analysis Notes</label>
+                    <textarea placeholder="How does this business compare to local competitors?"></textarea>
+                </div>
+                <button class="btn" onclick="generateReport()">Generate PDF Report</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        function updateScore() {
+            const checkboxes = document.querySelectorAll('#gmb-audit input[type="checkbox"]');
+            const checked = document.querySelectorAll('#gmb-audit input[type="checkbox"]:checked').length;
+            const total = checkboxes.length;
+            const score = Math.round((checked / total) * 100);
+            document.getElementById('gmbScore').textContent = score + '%';
+        }
+
+        function updateCitationScore() {
+            const checkboxes = document.querySelectorAll('#citations input[type="checkbox"]');
+            const checked = document.querySelectorAll('#citations input[type="checkbox"]:checked').length;
+            const total = checkboxes.length;
+            const score = Math.round((checked / total) * 100);
+            document.getElementById('citationScore').textContent = score + '%';
+        }
+
+        function updateReviewScore() {
+            const checkboxes = document.querySelectorAll('#reviews input[type="checkbox"]');
+            const checked = document.querySelectorAll('#reviews input[type="checkbox"]:checked').length;
+            const total = checkboxes.length;
+            const score = Math.round((checked / total) * 100);
+            document.getElementById('reviewScore').textContent = score + '%';
+        }
+
+        function generateReport() {
+            const businessName = document.getElementById('businessName').value || 'Business Name';
+            
+            // Calculate overall score
+            const gmbScore = parseInt(document.getElementById('gmbScore').textContent) || 0;
+            const citationScore = parseInt(document.getElementById('citationScore').textContent) || 0;
+            const reviewScore = parseInt(document.getElementById('reviewScore').textContent) || 0;
+            const overallScore = Math.round((gmbScore + citationScore + reviewScore) / 3);
+            
+            document.getElementById('overallScore').value = overallScore + '%';
+            
+            alert(`Local SEO Audit Report Generated for ${businessName}\n\nOverall Score: ${overallScore}%\n\nBreakdown:\n- GMB Optimization: ${gmbScore}%\n- Citation Management: ${citationScore}%\n- Review Management: ${reviewScore}%\n\nThis is a demo - in a real Excel template, this would export to PDF.`);
+        }
+
+        // Auto-save functionality simulation
+        function autoSave() {
+            const formData = {
+                businessName: document.getElementById('businessName')?.value,
+                businessAddress: document.getElementById('businessAddress')?.value,
+                businessPhone: document.getElementById('businessPhone')?.value,
+                businessWebsite: document.getElementById('businessWebsite')?.value,
+                businessCategory: document.getElementById('businessCategory')?.value,
+                targetKeywords: document.getElementById('targetKeywords')?.value,
+                timestamp: new Date().toISOString()
+            };
+            
+            // In a real Excel template, this would save to the worksheet
+            console.log('Auto-saved:', formData);
+        }
+
+        // Auto-save every 30 seconds
+        setInterval(autoSave, 30000);
+
+        // Initialize tooltips and help text
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add help tooltips to form elements
+            const helpTexts = {
+                'businessName': 'Use the exact name as it appears on your Google My Business listing',
+                'businessAddress': 'Include full address with zip code. Ensure it matches GMB exactly.',
+                'businessPhone': 'Use local phone number format. Avoid toll-free numbers for local SEO.',
+                'targetKeywords': 'Focus on geo-specific keywords like "plumber in [city]" or "[service] near me"'
+            };
+            
+            Object.keys(helpTexts).forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.title = helpTexts[id];
+                }
+            });
+        });
+
+        // Add dynamic form validation
+        function validateForm() {
+            const required = ['businessName', 'businessAddress', 'businessPhone'];
+            let isValid = true;
+            
+            required.forEach(id => {
+                const element = document.getElementById(id);
+                if (element && !element.value.trim()) {
+                    element.style.borderColor = '#e74c3c';
+                    isValid = false;
+                } else if (element) {
+                    element.style.borderColor = '#ddd';
+                }
+            });
+            
+            return isValid;
+        }
+
+        // Phone number formatting
+        document.getElementById('businessPhone')?.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 6) {
+                value = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+            } else if (value.length >= 3) {
+                value = value.replace(/(\d{3})(\d{1,3})/, '($1) $2');
+            }
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>
